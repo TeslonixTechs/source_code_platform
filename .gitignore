@@ -1,0 +1,14 @@
+# Ignore node_modules directory (common for Node.js projects)
+node_modules/
+
+# Ignore environment variables file
+
+# Ignore log files
+logs/
+*.log
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+# Ignore a specific file within a folder
+
