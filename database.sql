@@ -12,12 +12,16 @@ CREATE TABLE users (
 
 CREATE TABLE repositories (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   description TEXT,
-  private BOOLEAN DEFAULT FALSE,
+  visibility ENUM('public', 'private') DEFAULT 'public',
   user_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  forked_from INT DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (forked_from) REFERENCES repositories(id)
 );
+
 
 CREATE TABLE files (
   id INT AUTO_INCREMENT PRIMARY KEY,
