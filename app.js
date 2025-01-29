@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
-const repoRoutes = require('./routes/repos');
+const repoRoutes = require('./routes/repo');
 const fileRoutes = require('./routes/files');
 const issueRoutes = require('./routes/issues');
 const profileRoutes = require('./routes/profile');
@@ -15,7 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
-app.use('/api/repos', repoRoutes);
+app.use('/api/repo', repoRoutes);
 app.use('/api/files', fileRoutes);
 app.use('/api/issues', issueRoutes);
 app.use('/api/profile', profileRoutes);

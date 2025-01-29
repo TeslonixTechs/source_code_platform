@@ -1,5 +1,3 @@
-CREATE DATABASE github_clone;
-
 USE github_clone;
 
 CREATE TABLE users (
@@ -62,8 +60,6 @@ CREATE TABLE starred_repos (
   FOREIGN KEY (repo_id) REFERENCES repositories(id)
 );
 
-ALTER TABLE repositories ADD COLUMN forked_from INT NULL;
-
 CREATE TABLE contributors (
   repo_id INT NOT NULL,
   user_id INT NOT NULL,
@@ -119,7 +115,7 @@ CREATE TABLE notifications (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   message TEXT NOT NULL,
-  read BOOLEAN DEFAULT FALSE,
+  isRead BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id)
 );

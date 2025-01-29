@@ -105,7 +105,7 @@ github-clone-backend/
 
 ### **1. Clone the Repository**
 ```bash
-git clone https://github.com/TeslonixTechs/github-clone-backend.git
+git clone https://github.com/yourusername/github-clone-backend.git
 cd github-clone-backend
 ```
 
@@ -177,10 +177,83 @@ Server will run at `http://localhost:5000`.
 
 ## Future Enhancements
 
-- **Organizations**: Add support for organization-level repositories.
-- **Private Messaging**: Enable user-to-user messaging.
-- **GraphQL API**: Add GraphQL support for optimized data queries.
-- **Mobile App Support**: Develop a companion mobile app.
+### **1. Organizations**
+Support organization-level repositories and team collaboration:
+
+#### **Code Snippet**
+```javascript
+// Organization Model (models/Organization.js)
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
+
+const Organization = sequelize.define('Organization', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  description: { type: DataTypes.TEXT },
+  createdAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
+});
+
+module.exports = Organization;
+```
+
+### **2. Private Messaging**
+Enable private messaging between users:
+
+#### **Code Snippet**
+```javascript
+// Messaging Route (routes/messaging.js)
+router.post('/send', authMiddleware, async (req, res) => {
+  const { recipientId, message } = req.body;
+  const senderId = req.user.id;
+
+  try {
+    const newMessage = await Message.create({ senderId, recipientId, message });
+    res.status(201).json({ success: true, message: newMessage });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to send message' });
+  }
+});
+```
+
+### **3. GraphQL API**
+Add GraphQL support for optimized data queries:
+
+#### **Code Snippet**
+```javascript
+const { ApolloServer, gql } = require('apollo-server-express');
+
+const typeDefs = gql`
+  type Query {
+    user(id: ID!): User
+    repository(id: ID!): Repository
+  }
+
+  type User {
+    id: ID!
+    username: String!
+    email: String!
+  }
+
+  type Repository {
+    id: ID!
+    name: String!
+    owner: User!
+  }
+`;
+
+const resolvers = {
+  Query: {
+    user: async (_, { id }) => await User.findByPk(id),
+    repository: async (_, { id }) => await Repository.findByPk(id)
+  }
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
+server.applyMiddleware({ app });
+```
+
+### **4. Mobile App Support**
+Develop a companion mobile app with features like push notifications using Firebase.
 
 ---
 
@@ -192,7 +265,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Contributors
 
-- **Your Name** - [GitHub Profile](https://github.com/TeslonixTechs)
+- **Your Name** - [GitHub Profile](https://github.com/yourusername)
 
 Feel free to open issues or submit pull requests for improvements!
 
