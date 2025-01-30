@@ -7,16 +7,19 @@ This project is a GitHub clone backend built using **Node.js**, **Express**, and
 ## Features
 
 ### **Authentication**
+
 - User Registration with email verification (using OTP).
 - JWT-based login and token management.
 - Two-factor authentication (2FA) for enhanced security.
 
 ### **User Management**
+
 - View and update user profiles.
 - Upload profile pictures.
 - Restriction: Email cannot be updated after registration.
 
 ### **Repository Management**
+
 - Create, update, and delete repositories.
 - Public and private repository options.
 - Fork repositories.
@@ -24,27 +27,34 @@ This project is a GitHub clone backend built using **Node.js**, **Express**, and
 - Star repositories.
 
 ### **Issues and Labels**
+
 - Create, view, and manage issues for repositories.
 - Add labels to issues.
 
 ### **Commits**
+
 - Track commit history for repositories.
 - Display commit logs.
 
 ### **Webhooks**
+
 - Create and manage webhooks to send repository events to external services.
 
 ### **CI/CD Integration**
+
 - Basic CI/CD pipeline simulation.
 - Automatically run tests and deploy code changes.
 
 ### **Notifications**
+
 - Notify users of significant events (e.g., new issues, starred repositories).
 
 ### **Search**
+
 - Search for users and repositories.
 
 ### **Advanced Features**
+
 - Two-factor authentication (2FA) with QR code and secret keys.
 - Activity feed for repository events.
 
@@ -104,18 +114,22 @@ github-clone-backend/
 ## Installation
 
 ### **1. Clone the Repository**
+
 ```bash
 git clone https://github.com/yourusername/github-clone-backend.git
 cd github-clone-backend
 ```
 
 ### **2. Install Dependencies**
+
 ```bash
 npm install
 ```
 
 ### **3. Setup Environment Variables**
+
 Create a `.env` file in the root directory and configure the following:
+
 ```env
 PORT=5000
 DB_HOST=localhost
@@ -129,16 +143,20 @@ EMAIL_PASSWORD=your_email_password
 ```
 
 ### **4. Setup the Database**
+
 Run the SQL scripts to create the database and tables:
+
 ```sql
 CREATE DATABASE github_clone;
 -- Use the detailed table creation scripts from the feature sections
 ```
 
 ### **5. Start the Server**
+
 ```bash
 npm start
 ```
+
 Server will run at `http://localhost:5000`.
 
 ---
@@ -146,31 +164,37 @@ Server will run at `http://localhost:5000`.
 ## API Endpoints
 
 ### **Authentication**
+
 - `POST /api/auth/register`: Register a new user.
 - `POST /api/auth/login`: Login and get a JWT.
 - `POST /api/auth/2fa/setup`: Enable 2FA for a user.
 - `POST /api/auth/2fa/verify`: Verify a 2FA token.
 
 ### **User Management**
+
 - `GET /api/users/:id`: Get user profile.
 - `PUT /api/users/:id`: Update user profile (excluding email).
 
 ### **Repositories**
+
 - `POST /api/repositories`: Create a repository.
 - `GET /api/repositories/:id`: Get repository details.
 - `PUT /api/repositories/:id`: Update repository details.
 - `DELETE /api/repositories/:id`: Delete a repository.
 
 ### **Issues**
+
 - `POST /api/issues/:repo_id`: Create an issue.
 - `GET /api/issues/:repo_id`: List all issues for a repository.
 - `POST /api/issues/:issue_id/labels`: Add a label to an issue.
 
 ### **Webhooks**
+
 - `POST /api/webhooks`: Create a webhook for a repository.
 - `DELETE /api/webhooks/:id`: Delete a webhook.
 
 ### **Search**
+
 - `GET /api/search?query=...`: Search for repositories and users.
 
 ---
@@ -178,9 +202,11 @@ Server will run at `http://localhost:5000`.
 ## Future Enhancements
 
 ### **1. Organizations**
+
 Support organization-level repositories and team collaboration:
 
 #### **Code Snippet**
+
 ```javascript
 // Organization Model (models/Organization.js)
 const { DataTypes } = require('sequelize');
@@ -197,9 +223,11 @@ module.exports = Organization;
 ```
 
 ### **2. Private Messaging**
+
 Enable private messaging between users:
 
 #### **Code Snippet**
+
 ```javascript
 // Messaging Route (routes/messaging.js)
 router.post('/send', authMiddleware, async (req, res) => {
@@ -216,9 +244,11 @@ router.post('/send', authMiddleware, async (req, res) => {
 ```
 
 ### **3. GraphQL API**
+
 Add GraphQL support for optimized data queries:
 
 #### **Code Snippet**
+
 ```javascript
 const { ApolloServer, gql } = require('apollo-server-express');
 
@@ -253,6 +283,7 @@ server.applyMiddleware({ app });
 ```
 
 ### **4. Mobile App Support**
+
 Develop a companion mobile app with features like push notifications using Firebase.
 
 ---
@@ -268,4 +299,3 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - **Your Name** - [GitHub Profile](https://github.com/yourusername)
 
 Feel free to open issues or submit pull requests for improvements!
-
